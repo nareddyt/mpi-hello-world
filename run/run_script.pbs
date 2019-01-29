@@ -1,0 +1,15 @@
+# This is an example PBS script
+
+#PBS -N nareddyt-hello-world
+#PBS -l nodes=2:ppn=2
+#PBS -l mem=2gb
+#PBS -l walltime=00:15:00
+#PBS -q coc-ice
+#PBS -o myjob.out
+
+cd ~/mpi-hello-world/cmake-build-debug
+make
+cd ~/mpi-hello-world/run
+echo "Started on `/bin/hostname`"
+module load gcc mvapich2/2.2
+mpirun -np 4 ~/mpi-hello-world/cmake-build-debug/mpi-hello-world
